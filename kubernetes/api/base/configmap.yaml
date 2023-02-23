@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: api-configmap
+data:
+  ACCESS_TOKEN_EXPIRY: ""
+  DB_DAILECT: ""
+  DB_DATABASE: ""
+  DB_HOST: ""
+  DB_PORT: ""
+  PORT: ""
+  REFRESH_TOKEN_COOKIE_NAME: ""
+  REFRESH_TOKEN_EXPIRY: ""

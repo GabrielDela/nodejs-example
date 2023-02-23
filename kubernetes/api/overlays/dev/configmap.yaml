@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: api-configmap
+data:
+  ACCESS_TOKEN_EXPIRY: 15m
+  DB_DAILECT: postgres
+  DB_DATABASE: postgres
+  DB_HOST: db
+  DB_PORT: "5432"
+  PORT: "3000"
+  REFRESH_TOKEN_COOKIE_NAME: jid
+  REFRESH_TOKEN_EXPIRY: 7d
