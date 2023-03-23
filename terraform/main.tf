@@ -47,7 +47,6 @@ resource "azurerm_postgresql_server" "postgres-server" {
   version                      = "9.5"
   ssl_enforcement_enabled      = false
   ssl_minimal_tls_version_enforced = "TLSEnforcementDisabled"
-
 }
 
 resource "azurerm_postgresql_firewall_rule" "firewall" {
@@ -70,22 +69,38 @@ resource "azurerm_postgresql_firewall_rule" "firewall" {
 # WEB APP SECTION  #
 ####################
 
-# resource "azurerm_service_plan" "app_plan" {
-#   name                = "app-plan-${var.project_name}${var.environment_suffix}"
-#   resource_group_name = data.azurerm_resource_group.rg.name
+# resource "azurerm_service_plan" "api" {
+#   name                = "app-service-plan-${var.project_name}${var.environment_suffix}"
 #   location            = data.azurerm_resource_group.rg.location
+#   resource_group_name = data.azurerm_resource_group.rg.name
 #   os_type             = "Linux"
 #   sku_name            = "S1"
 # }
 
-# resource "azurerm_linux_web_app" "web_app" {
-#   name                = "web-app-${var.project_name}${var.environment_suffix}"
-#   resource_group_name = data.azurerm_resource_group.rg.name
+# resource "azurerm_linux_web_app" "api" {
+#   name                = "webapp-${var.project_name}${var.environment_suffix}"
 #   location            = data.azurerm_resource_group.rg.location
-#   service_plan_id     = azurerm_service_plan.app_plan.id
+#   resource_group_name = data.azurerm_resource_group.rg.name
+#   app_service_plan_id = azurerm_service_plan.api.id
 
 #   site_config {
-    
+#     linux_fx_version = "DOCKER|gabrieldela/nodejs-example:1.0"
+#   }
+
+#   app_settings = {
+#     "PORT"        = var.api_port
+#     "DB_HOST"     = azurerm_postgresql_server.postgres-server.fqdn
+#     "DB_USERNAME" = "${data.azurerm_key_vault_secret.database-login.value}@${azurerm_postgresql_server.postgres-server.name}"
+#     "DB_PASSWORD" = data.azurerm_key_vault_secret.database-password.value
+#     "DB_DATABASE" = var.database_name
+#     "DB_DAILECT"  = var.database_dialect
+#     "DB_PORT"     = var.database_port
+
+#     "ACCESS_TOKEN_SECRET"       = data.azurerm_key_vault_secret.access-token.value
+#     "REFRESH_TOKEN_SECRET"      = data.azurerm_key_vault_secret.refresh-token.value
+#     "ACCESS_TOKEN_EXPIRY"       = var.access_token_expiry
+#     "REFRESH_TOKEN_EXPIRY"      = var.refresh_token_expiry
+#     "REFRESH_TOKEN_COOKIE_NAME" = var.refresh_token_cookie_name
 #   }
 # }
 
