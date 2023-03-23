@@ -70,28 +70,29 @@ resource "azurerm_postgresql_firewall_rule" "firewall" {
 # WEB APP SECTION  #
 ####################
 
-resource "azurerm_service_plan" "app_plan" {
-  name                = "app-plan-${var.project_name}${var.environment_suffix}"
-  resource_group_name = data.azurerm_resource_group.rg.name
-  location            = data.azurerm_resource_group.rg.location
-  os_type             = "Linux"
-  sku_name            = "S1"
-}
+# resource "azurerm_service_plan" "app_plan" {
+#   name                = "app-plan-${var.project_name}${var.environment_suffix}"
+#   resource_group_name = data.azurerm_resource_group.rg.name
+#   location            = data.azurerm_resource_group.rg.location
+#   os_type             = "Linux"
+#   sku_name            = "S1"
+# }
 
-resource "azurerm_linux_web_app" "web_app" {
-  name                = "web-app-${var.project_name}${var.environment_suffix}"
-  resource_group_name = data.azurerm_resource_group.rg.name
-  location            = data.azurerm_resource_group.rg.location
-  service_plan_id     = azurerm_service_plan.app_plan.id
+# resource "azurerm_linux_web_app" "web_app" {
+#   name                = "web-app-${var.project_name}${var.environment_suffix}"
+#   resource_group_name = data.azurerm_resource_group.rg.name
+#   location            = data.azurerm_resource_group.rg.location
+#   service_plan_id     = azurerm_service_plan.app_plan.id
 
-  site_config {
+#   site_config {
     
-  }
-}
+#   }
+# }
 
 ####################
 # API SECTION      #
 ####################
+
 resource "azurerm_container_group" "api" {
   name                = "aci-api-${var.project_name}${var.environment_suffix}"
   location            = data.azurerm_resource_group.rg.location
